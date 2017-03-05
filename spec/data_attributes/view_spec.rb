@@ -130,6 +130,14 @@ describe DataAttributes::View do
 
     end
 
+    context 'with a date' do
+
+      it 'returns date formatted' do
+        expect(view.data_attribute_value(Date.new(2017, 4, 27))).to eq('2017/04/27')
+      end
+
+    end
+
     context 'with a data attributes model' do
 
       it 'returns hash of attributes as JSON' do

@@ -6,4 +6,3 @@ lib_path = "#{__dir__}/data_attributes"
 
 require "#{lib_path}/model"
 require "#{lib_path}/view"
-require "#{lib_path}/rails_view"

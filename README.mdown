@@ -15,7 +15,51 @@ Then, just run a `bundle install`.
 
 ## Usage
 
-TODO
+In your model just add `DataAttributes::Model` mixin:
+
+```ruby
+class Article
+
+  include DataAttributes::Model
+
+end
+```
+
+Then, you can define you model's data attributes that are included into view:
+
+```ruby
+class Article
+
+  include DataAttributes::Model
+
+  data_attribute :id, :title
+
+end
+```
+
+Then you must add `DataAttribute::View` into Rails `ApplicationHelper`:
+
+```ruby
+module ApplicationHelper
+
+  include DataAttribute::View
+
+end
+```
+
+Then `content_tag_for` and `div_for` methods from [record_tag_helper](https://rubygems.org/gems/record_tag_helper)
+gem will add model's data attributes into view:
+
+```ruby
+<%= div_for @article do %>
+<!-- <div class="article" data-id="42" data-title="Hello!"> -->
+```
+
+You can also pass data attributes directly:
+
+```ruby
+<%= content_tag :div, id: 'articles', data: { count: 28 } do %>
+```
 
 ## Executing test suite
 
