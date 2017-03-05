@@ -11,6 +11,14 @@ Just add this into your `Gemfile`:
 gem 'data_attributes'
 ```
 
+If you want to take benefits of `content_tag_for` and `div_for` methods, add
+also [record_tag_helper](https://rubygems.org/gems/record_tag_helper) into
+your `Gemfile`:
+
+```ruby
+gem 'record_tag_helper'
+```
+
 Then, just run a `bundle install`.
 
 ## Usage
