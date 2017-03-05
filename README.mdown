@@ -50,14 +50,14 @@ end
 Then `content_tag_for` and `div_for` methods from [record_tag_helper](https://rubygems.org/gems/record_tag_helper)
 gem will add model's data attributes into view:
 
-```ruby
+```erb
 <%= div_for @article do %>
 <!-- <div class="article" data-id="42" data-title="Hello!"> -->
 ```
 
 You can also pass data attributes directly:
 
-```ruby
+```erb
 <%= content_tag :div, id: 'articles', data: { count: 28 } do %>
 ```
 
