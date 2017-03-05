@@ -55,7 +55,7 @@ gem will add model's data attributes into view:
 <!-- <div class="article" data-id="42" data-title="Hello!"> -->
 ```
 
-You can also pass data attributes directly:
+You can also pass data attributes directly to `content_tag` method:
 
 ```erb
 <%= content_tag :div, id: 'articles', data: { count: 28 } do %>
