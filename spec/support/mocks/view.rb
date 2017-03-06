@@ -1,5 +1,5 @@
 class View
 
-  include DataAttributes::View
+  include DataAttributes::Helper
 
 end

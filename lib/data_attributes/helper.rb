@@ -1,6 +1,6 @@
 module DataAttributes
 
-  module View
+  module Helper
 
     def content_tag_for_single_record(tag_name, record, prefix, options, &block)
       options, prefix = prefix, nil if prefix.is_a?(Hash)

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DataAttributes::View do
+describe DataAttributes::Helper do
 
   let(:view) { View.new }
 

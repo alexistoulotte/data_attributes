@@ -1,7 +1,7 @@
 # DataAttributes
 
-Convenience helpers to provide [HTML data attributes](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes)
-from model to view.
+A gem to provide [HTML data attributes](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes)
+easily from model to view.
 
 ## Setup
 
@@ -45,15 +45,9 @@ class Article
 end
 ```
 
-Then you must add `DataAttribute::View` into Rails `ApplicationHelper`:
+Note that `DataAttributes::Model` mixin is automatically added into
+`ActiveRecord::Base` (if present).
 
-```ruby
-module ApplicationHelper
-
-  include DataAttribute::View
-
-end
-```
 
 Then `content_tag_for` and `div_for` methods from [record_tag_helper](https://rubygems.org/gems/record_tag_helper)
 gem will add model's data attributes into view:

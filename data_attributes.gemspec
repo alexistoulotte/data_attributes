@@ -5,8 +5,8 @@ Gem::Specification.new do |s|
   s.author = 'Alexis Toulotte'
   s.email = 'al@alweb.org'
   s.homepage = 'https://github.com/alexistoulotte/data_attributes'
-  s.summary = 'Helpers for HTML data attributes'
-  s.description = 'Convenience helpers to provide HTML data attributes from model to view'
+  s.summary = 'Provides HTML data attributes from model to view'
+  s.description = 'A gem to provide HTML data attributes from model to view'
   s.license = 'MIT'
 
   s.files = `git ls-files`.split("\n")
