@@ -6,6 +6,7 @@ module DataAttributes
       options, prefix = prefix, nil if prefix.is_a?(Hash)
       options ||= {}
       options[:data] ||= {}
+      options[:data] = options[:data].data_attributes if options[:data].is_a?(DataAttributes::Model)
       options[:data].reverse_merge!(record.data_attributes) if record.is_a?(DataAttributes::Model)
       options.reverse_merge!(class: record.class.model_name.singular.dasherize)
       if block.arity == 0

@@ -2,7 +2,46 @@ require 'spec_helper'
 
 describe DataAttributes::Helper do
 
-  let(:view) { View.new }
+  let(:view) { ActionView::Base.new }
+
+  before :each do
+    Article.data_attribute(:id, :body, :category)
+    Category.data_attribute(:id, :title)
+  end
+
+  let(:article) do
+    Article.new.tap do |article|
+      article.body = 'This is the body'
+      article.id = 28
+    end
+  end
+
+  let(:category) do
+    Category.new.tap do |category|
+      category.id = 20
+      category.title = 'Books'
+    end
+  end
+
+  describe '#content_tag_for_single_record' do
+
+    it 'renders correct HTML' do
+      expect(view.content_tag_for_single_record(:div, article, nil, {}) { 'Hey!' }).to eq('<div data-body="This is the body" data-id="28" class="article">Hey!</div>')
+    end
+
+    it 'is correct when :data option is given' do
+      expect(view.content_tag_for_single_record(:div, article, nil, data: { foo: 'bar' }) { 'Hey!' }).to eq('<div data-foo="bar" data-body="This is the body" data-id="28" class="article">Hey!</div>')
+    end
+
+    it 'is correct when :data option is a DataAttributes::Model' do
+      expect(view.content_tag_for_single_record(:div, article, nil, data: category) { 'Hey!' }).to eq('<div data-id="20" data-title="Books" data-body="This is the body" class="article">Hey!</div>')
+    end
+
+    it 'is correct when :data option contains a DataAttributes::Model' do
+      expect(view.content_tag_for_single_record(:div, article, nil, data: { category: category }) { 'Hey!' }).to eq('<div data-category="{&quot;id&quot;:20,&quot;title&quot;:&quot;Books&quot;}" data-body="This is the body" data-id="28" class="article">Hey!</div>')
+    end
+
+  end
 
   describe '#data_attribute_value' do
 
@@ -141,34 +180,16 @@ describe DataAttributes::Helper do
     context 'with a data attributes model' do
 
       it 'returns hash of attributes as JSON' do
-        Article.data_attribute(:id, :body)
-        article = Article.new
-        article.body = 'This is the body'
-        article.id = 28
-        expect(view.data_attribute_value(article)).to eq('{"body":"This is the body","id":28}')
+        expect(view.data_attribute_value(article)).to eq('{"body":"This is the body","category":null,"id":28}')
       end
 
       it 'accepts :prefix_strings option' do
-        Article.data_attribute(:id, :body)
-        article = Article.new
-        article.body = 'This is the body'
-        article.id = 28
-        expect(view.data_attribute_value(article, prefix_strings: true)).to eq('{"body":"string:This is the body","id":28}')
+        expect(view.data_attribute_value(article, prefix_strings: true)).to eq('{"body":"string:This is the body","category":null,"id":28}')
       end
 
       it 'is correct with a nested data attributes object' do
-        Article.data_attribute(:id, :body, :category)
-        Category.data_attribute(:id, :title)
-
-        category = Category.new
-        category.id = 20
-        category.title = 'Books'
-
-        article = Article.new
-        article.body = 'This is the body'
         article.category = category
-
-        expect(view.data_attribute_value(article)).to eq('{"body":"This is the body","category":{"id":20,"title":"Books"},"id":null}')
+        expect(view.data_attribute_value(article)).to eq('{"body":"This is the body","category":{"id":20,"title":"Books"},"id":28}')
       end
 
     end

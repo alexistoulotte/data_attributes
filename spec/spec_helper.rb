@@ -1,11 +1,12 @@
 require File.expand_path("#{__dir__}/../lib/data_attributes")
+require 'action_view'
+require 'active_model'
 require 'byebug'
 
 # Support
 require "#{__dir__}/support/mocks/content"
 require "#{__dir__}/support/mocks/article"
 require "#{__dir__}/support/mocks/category"
-require "#{__dir__}/support/mocks/view"
 
 RSpec.configure do |config|
   config.raise_errors_for_deprecations!
