@@ -23,6 +23,14 @@ describe DataAttributes::Helper do
     end
   end
 
+  describe '.data_attribute_value' do
+
+    it 'is working like #data_attribute_value' do
+      expect(DataAttributes::Helper.data_attribute_value({ id: 42, 'message' => :bam, date: Time.new(2017, 2, 10, 4, 1, 2), valid: true })).to eq('{"id":42,"message":"bam","date":1486659662,"valid":true}')
+    end
+
+  end
+
   describe '#content_tag_for_single_record' do
 
     it 'renders correct HTML' do
